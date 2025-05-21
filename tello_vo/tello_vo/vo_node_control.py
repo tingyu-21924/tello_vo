@@ -17,21 +17,20 @@ import matplotlib.pyplot as plt
 class VONode(Node):
     def __init__(self):
         super().__init__('vo_node')
-        self.frame_count = 0
         # Path publisher
+        self.frame_count = 0
         self.path_pub = self.create_publisher(Path, '/vo_path', 10)
         self.path_msg = Path()
         self.path_msg.header.frame_id = 'odom'
         self.vx_body, self.vy_body = 0.0, 0.0
         # Camera Calibration
-        fx, fy = 1120.6219, 1133.0317
-        cx, cy = 357.7350, 640.5663
-        #fx, fy = ?, ?
-        #cx, cy = ?, ?
+        fx, fy = ____, ____
+        cx, cy = ____, ____
         self.K = np.array([[fx,0,cx],[0,fy,cy],[0,0,1]], np.float64)
 
         # ORB + FLANN
-        self.orb = cv2.ORB_create(3000)
+        #The number of keypoints can be set to 1500, 3000, or other values—you can adjust this parameter as needed to suit your application.
+        self.orb = ____ 
         index_params = dict(algorithm=6, table_number=6, key_size=12, multi_probe_level=1)
         search_params = dict(checks=50)
         self.flann = cv2.FlannBasedMatcher(indexParams=index_params,
@@ -81,17 +80,13 @@ class VONode(Node):
         self.cmd_timestamp = self.get_clock().now().nanoseconds * 1e-9
         
     def image_callback(self, msg: Image):
+        
+        '''
+        During the first 20 frames after image input begins, the program only collects images for initialization and does not perform pose estimation.
         self.frame_count += 1
-        if self.frame_count <= 20:
-            try:
-                bgr = self.bridge.imgmsg_to_cv2(msg, 'bgr8')
-            except CvBridgeError as e:
-                self.get_logger().error(f"CvBridge error: {e}")
-                return
-            gray = cv2.cvtColor(bgr, cv2.COLOR_BGR2GRAY)
-            self.last_gray = gray
-            self.prev_img_stamp = msg.header.stamp.sec + msg.header.stamp.nanosec*1e-9
-            return
+        if ____:
+            ____
+        '''
         
         img_stamp = msg.header.stamp.sec + msg.header.stamp.nanosec*1e-9
         if self.prev_img_stamp is None:
