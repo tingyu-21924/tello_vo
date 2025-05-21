@@ -81,12 +81,12 @@ class VONode(Node):
         
     def image_callback(self, msg: Image):
         
-        '''
-        During the first 20 frames after image input begins, the program only collects images for initialization and does not perform pose estimation.
+        '''During the first 20 frames after image input begins, 
+        the program only collects images for initialization and does not perform pose estimation.'''
         self.frame_count += 1
         if ____:
             ____
-        '''
+        
         
         img_stamp = msg.header.stamp.sec + msg.header.stamp.nanosec*1e-9
         if self.prev_img_stamp is None:
