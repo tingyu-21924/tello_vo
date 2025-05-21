@@ -14,14 +14,13 @@ class VONode(Node):
         super().__init__('vo_node')
 
         #Camera Calibration
-        fx, fy = 1120.6219, 1133.0317
-        cx, cy = 357.7350, 640.5663
-        #fx, fy = ?, ?
-        #cx, cy = ?, ?
+        fx, fy = ____, ____
+        cx, cy = ____, ____
         self.K = np.array([[fx,0,cx],[0,fy,cy],[0,0,1]], np.float64)
 
         # ORB + FLANN
-        self.orb = cv2.ORB_create(3000)
+        #The number of keypoints can be set to 1500, 3000, or other values—you can adjust this parameter as needed to suit your application.
+        self.orb = ____ 
         index_params = dict(algorithm=6, table_number=6, key_size=12, multi_probe_level=1)
         search_params = dict(checks=50)
         self.flann = cv2.FlannBasedMatcher(indexParams=index_params,
