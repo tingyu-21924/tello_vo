@@ -55,7 +55,7 @@ class VONode(Node):
         self.get_logger().info("VO node started, waiting for /image_raw ...")
 
     def image_callback(self, msg: Image):
-        # 1. ROS Image → BGR → 灰階
+        # 1. ROS Image → BGR → gray
         try:
             bgr = self.bridge.imgmsg_to_cv2(msg, 'bgr8')
         except CvBridgeError as e:
